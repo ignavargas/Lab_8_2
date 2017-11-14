@@ -25,15 +25,6 @@ public class SharedMemory {
     }
 
     /*
-    * Metodo setFlag:
-    * Se utilza para acceder y modificar a la variable flagEscritor
-    * */
-    public void setFlag(boolean flagEscritor){
-        this.flagEscritor = flagEscritor;
-
-    }
-
-    /*
     * Metodo setContador:
     * Se utilza para acceder y aumentar a la variable contadorLectores
     * */
@@ -49,17 +40,6 @@ public class SharedMemory {
     public void setContadorOut(){
 
         this.contadorLectores--;
-    }
-
-    /*
-    * Metodo getFlag:
-    * Se utilza para acceder al valor de la variable flagEscritor
-    * returna un booleano, True en caso de que escriba,
-    * false en caso contrario
-    * */
-    public boolean getFlag(){
-
-        return flagEscritor;
     }
 
     /*
@@ -94,7 +74,7 @@ public class SharedMemory {
     public Integer ReadValue(){
 
         System.out.println(" ...");
-        int i = random.nextInt(sh_mem.size()+1);// genera un numero aleatorio entre 0 y el total de elementos en la lista
+        int i = random.nextInt(sh_mem.size());// genera un numero aleatorio entre 0 y el total de elementos en la lista
         return sh_mem.get(i);//extrae el valor por medio del indice
     }
 }
