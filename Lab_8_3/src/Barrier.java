@@ -14,7 +14,7 @@ public class Barrier implements Runnable{
     public Barrier(int numhijos){
 
         hijos = numhijos;
-        count = -1;
+        count = 0;
         counter = new Semaphore(1,true);
         barrier = new Semaphore(0, true);
     }
