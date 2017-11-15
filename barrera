@@ -1,0 +1,66 @@
+import java.util.concurrent.Semaphore;
+import java.lang.Runnable;
+
+public class Barrera implements Runnable
+{
+    Semaphore sOxigeno;
+    Semaphore sHidrogeno;
+    Semaphore barrier;
+    Semaphore key;
+    private volatile int contOxi;
+    private volatile int contHidro;
+    int tipo;
+
+    public Barrera(int tipo){
+        contOxi = 0;
+        contHidro = 0;
+        this.tipo = tipo;
+        sOxigeno = new Semaphore(1, true);
+        sHidrogeno = new Semaphore(0, true);
+        barrier = new Semaphore(0, true);
+    }
+    
+    public void bond(){
+
+    }
+    
+    
+    public void run()
+    {
+        if(tipo == 0) {
+            try {
+                sOxigeno.acquire();
+            } catch (InterruptedException IE) {
+                System.out.println("ERROR in counter acquire-1");
+            }
+
+            try {
+                key.acquire();
+                contOxi++;
+                key.release();
+            } catch (InterruptedException IE) {
+                System.out.println("ERROR in counter acquire-1");
+            }
+            if(contOxi == 2)
+            {
+                barrier.release();
+            }
+            sOxigeno.release();
+            
+            try {
+                System.out.println("Esperando");
+                barrier.acquire();
+            }catch (InterruptedException IE){
+                System.out.println("ERROR barrier acquire-1");
+            }
+
+            barrier.release();
+            System.out.println("soy libre!!!");
+            
+        }
+
+
+
+    }
+
+}
