@@ -37,14 +37,14 @@ public class Barrera implements Runnable
             try {
                 key.acquire();
                 contOxi++;
+                if(countHidro >= 2){
+                    barrier.release();
+                }
                 key.release();
             } catch (InterruptedException IE) {
                 System.out.println("ERROR in counter acquire-1");
             }
-            if(contOxi == 2)
-            {
-                barrier.release();
-            }
+            
             sOxigeno.release();
             
             try {
@@ -57,6 +57,30 @@ public class Barrera implements Runnable
             barrier.release();
             System.out.println("soy libre!!!");
             
+        }else{
+        
+            if(tipo == 1){
+            
+                key.acquire();
+                contHidro++;
+                if(countHidro >= 2 && count Oxi >= 1){
+                
+                    sHidrogeno.release();
+                    sHidrogeno.Release();
+                    countHidro--;
+                    sOxigeno.release();
+                    countOxi--;
+                }else{
+                    key.release();
+                }
+                
+                s.Hidrogeno.acquire();
+                
+                bond();
+                
+                barrier.acquire();
+            
+            }
         }
 
 
